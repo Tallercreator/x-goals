@@ -24,6 +24,14 @@ function typeClass(t) { return t === 'x' ? 'x' : t === 'ind' ? 'ind' : t === 'cm
 function tagClass(t) { return t === 'x' ? 'tag--x' : t === 'ind' ? 'tag--ind' : 'tag--cmd'; }
 function tagLabel(t) { return t === 'x' ? 'Х-цель' : t === 'ind' ? 'Инд.' : 'Ком.'; }
 
+/* Окончание слова «подцель» по числу */
+function plural(n) {
+  var d10 = n % 10, d100 = n % 100;
+  if (d10 === 1 && d100 !== 11) return 'ь';        /* 1 подцель  */
+  if (d10 >= 2 && d10 <= 4 && (d100 < 10 || d100 >= 20)) return 'и'; /* 2 подцели */
+  return 'ей';                                       /* 5 подцелей */
+}
+
 /* ───── Предки (для крошек) ───── */
 function getAncestors(id) {
   var path = [];
@@ -70,12 +78,35 @@ function renderBreadcrumb() {
 }
 
 /* ───── Навигация ───── */
-function navigateTo(id) {
+var lastDir = 'fade';   /* направление последнего перехода: 'in' | 'up' | 'fade' */
+
+/* Внутреннее переключение узла + вычисление направления анимации */
+function setCurrent(id) {
+  var prevDepth = getAncestors(curId).length;
   curId = id;
   expandedIds = {};
   expandedIds[id] = true;
-  renderAll();
+  var newDepth = getAncestors(id).length;
+  lastDir = newDepth > prevDepth ? 'in' : newDepth < prevDepth ? 'up' : 'fade';
 }
+
+/* Навигация с записью в историю браузера */
+function navigateTo(id) {
+  if (!nodeMap[id] || id === curId) return;
+  setCurrent(id);
+  history.pushState({ goalId: id }, '', '?goalId=' + id);
+  renderAll();
+  document.querySelector('.goal-content').scrollTop = 0;
+}
+
+/* Кнопки «назад / вперёд» браузера и deep-link */
+window.addEventListener('popstate', function (e) {
+  var id = (e.state && e.state.goalId) ||
+    new URLSearchParams(location.search).get('goalId') || startId;
+  if (!nodeMap[id]) id = startId;
+  setCurrent(id);
+  renderAll();
+});
 
 window.selQ = function (i) {
   document.querySelectorAll('.q-tab').forEach(function (t, idx) {
@@ -106,7 +137,7 @@ function renderGoals() {
   var cur = entry.node;
   var parentNode = entry.parent;
 
-  /* Родительская цель */
+  /* Родительская цель — кликабельна «вверх» */
   area.appendChild(sectionLabel('Родительская цель'));
   if (parentNode && parentNode.type !== 'project') {
     area.appendChild(buildCard(parentNode, 'parent', false));
@@ -121,13 +152,25 @@ function renderGoals() {
   area.appendChild(sectionLabel('Текущая цель'));
   area.appendChild(buildCard(cur, 'current', true));
 
-  /* Дочерние цели */
-  if (cur.children && cur.children.length) {
-    area.appendChild(sectionLabel('Дочерние цели (' + cur.children.length + ')'));
+  /* Дочерние цели — кликабельны «вниз» */
+  var childCount = cur.children ? cur.children.length : 0;
+  area.appendChild(sectionLabel('Дочерние цели (' + childCount + ')'));
+  if (childCount) {
     cur.children.forEach(function (ch) {
       area.appendChild(buildCard(ch, 'child', false));
     });
+  } else {
+    var empty = document.createElement('div');
+    empty.className = 'children-empty';
+    empty.innerHTML = '<i class="ti ti-stack-2" style="font-size:16px;color:var(--gray-300)"></i>' +
+      'У этой цели нет дочерних целей — это нижний уровень дерева';
+    area.appendChild(empty);
   }
+
+  /* Направленная анимация перехода */
+  area.classList.remove('goals-area--in', 'goals-area--up', 'goals-area--fade');
+  void area.offsetWidth;                       /* перезапуск анимации */
+  area.classList.add('goals-area--' + lastDir);
 }
 
 function sectionLabel(text) {
@@ -145,7 +188,22 @@ function buildCard(node, variant, isExpanded) {
   var isOpen = !!expandedIds[node.id];
   var dc = dotColor(node.pct || 0);
   var canExpand = node.dos && node.dos.length > 0;
-  var canNavigate = node.children && node.children.length > 0;
+  var childN = node.children ? node.children.length : 0;
+  var canNavigate = childN > 0;
+
+  /* Дочерняя карточка с детьми — кликабельна целиком (drill in) */
+  var drillable = variant === 'child' && canNavigate;
+  if (drillable) card.classList.add('is-drillable');
+
+  /* Действия в правой части: зависят от роли карточки */
+  var actionHtml = '';
+  if (variant === 'parent') {
+    actionHtml = '<button class="nav-up-btn" title="Подняться к родительской цели">↑ Вверх</button>';
+  } else if (variant === 'child') {
+    if (canNavigate) actionHtml += '<span class="child-count" title="Дочерних целей">↓ ' + childN + ' подцел' + plural(childN) + '</span>';
+    actionHtml += '<span class="drill-hint">Провалиться</span>';
+  }
+  actionHtml += '<i class="ti ti-copy copy-ic"></i>';
 
   /* Header */
   var hdr = document.createElement('div');
@@ -159,27 +217,34 @@ function buildCard(node, variant, isExpanded) {
     '<span class="gh-name' + (variant === 'current' ? ' gh-name--big' : '') + '">' + node.name + '</span>' +
     '<div class="inline-prog"><div class="inline-prog-f" style="width:' + (node.pct || 0) + '%;background:' + dc + '"></div></div>' +
     '<span class="gh-weight">' + (node.weight || '—') + '</span>' +
-    '<div class="gh-action">' +
-      (canNavigate ? '<button class="nav-into-btn" title="Перейти к дочерним целям">Провалиться ↓</button>' : '') +
-      '<i class="ti ti-copy copy-ic"></i>' +
-    '</div>';
+    '<div class="gh-action">' + actionHtml + '</div>';
 
-  /* Кнопка «Провалиться» */
-  var navBtn = hdr.querySelector('.nav-into-btn');
-  if (navBtn) navBtn.onclick = function (e) {
-    e.stopPropagation();
-    navigateTo(node.id);
-  };
-
-  /* Toggle деталей */
-  hdr.onclick = function (e) {
-    if (e.target.closest('.nav-into-btn')) return;
+  /* Шеврон — всегда разворачивает детали (peek), не навигирует */
+  function toggleDetails() {
     if (!canExpand) return;
     expandedIds[node.id] = !expandedIds[node.id];
     var arr = document.getElementById('arr-' + node.id);
     var body = document.getElementById('body-' + node.id);
     if (arr) arr.classList.toggle('is-open', expandedIds[node.id]);
     if (body) body.classList.toggle('is-open', expandedIds[node.id]);
+  }
+
+  var chevron = hdr.querySelector('.gh-arrow');
+  if (chevron) chevron.onclick = function (e) { e.stopPropagation(); toggleDetails(); };
+
+  var upBtn = hdr.querySelector('.nav-up-btn');
+  if (upBtn) upBtn.onclick = function (e) { e.stopPropagation(); navigateTo(node.id); };
+
+  /* Клик по карточке:
+     - parent  → подняться к родителю
+     - child с детьми → провалиться внутрь
+     - иначе   → раскрыть/свернуть детали */
+  hdr.onclick = function (e) {
+    if (e.target.closest('.gh-arrow') || e.target.closest('.copy-ic') ||
+        e.target.closest('.nav-up-btn')) return;
+    if (variant === 'parent') { navigateTo(node.id); return; }
+    if (drillable) { navigateTo(node.id); return; }
+    toggleDetails();
   };
 
   card.appendChild(hdr);
@@ -267,4 +332,5 @@ function buildBody(node, isOpen) {
 }
 
 /* ───── Init ───── */
+history.replaceState({ goalId: curId }, '', '?goalId=' + curId);
 renderAll();

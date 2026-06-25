@@ -1492,3 +1492,101 @@ ul, ol { list-style-position: inside; }
   color: var(--gray-800);
 }
 .withdraw-btn:hover { background: var(--gray-50); }
+
+
+/* ───── Бесшовное проваливание в дерево целей ───── */
+
+/* Направленная анимация при навигации */
+@keyframes drill-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes drill-up {
+  from { opacity: 0; transform: translateY(-14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes drill-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.goals-area--in   { animation: drill-in  .24s ease both; }
+.goals-area--up   { animation: drill-up  .24s ease both; }
+.goals-area--fade { animation: drill-fade .2s ease both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .goals-area--in,
+  .goals-area--up,
+  .goals-area--fade { animation: none; }
+}
+
+/* Родитель — кликабелен «вверх» */
+.goal-card--parent { cursor: pointer; transition: border-color .12s, background .12s; }
+.goal-card--parent:hover { border-color: var(--purple-300); background: #faf9ff; }
+
+/* Дочерняя цель с детьми — кликабельна «вниз» */
+.goal-card--child.is-drillable { cursor: pointer; transition: border-color .12s, box-shadow .12s, transform .08s; }
+.goal-card--child.is-drillable:hover {
+  border-color: var(--purple-300);
+  box-shadow: 0 2px 10px rgba(106, 44, 181, .08);
+}
+.goal-card--child.is-drillable:active { transform: translateY(1px); }
+
+/* Pill «↑ Вверх» на родителе */
+.nav-up-btn {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--gray-600);
+  background: var(--gray-50);
+  border: none;
+  border-radius: 5px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+.nav-up-btn:hover { background: var(--gray-200); }
+
+/* Счётчик дочерних целей */
+.child-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--purple-600);
+  background: var(--purple-50);
+  border-radius: 5px;
+  padding: 2px 7px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Подсказка «проваливания» в hover у дочерней карточки */
+.drill-hint {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--purple-600);
+  background: #f3e8ff;
+  border-radius: 5px;
+  padding: 3px 8px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity .12s;
+}
+.goal-card--child.is-drillable:hover .drill-hint { opacity: 1; }
+
+/* Пустое состояние «нет дочерних целей» */
+.children-empty {
+  padding: 14px 20px;
+  font-size: 13px;
+  color: var(--gray-400);
+  background: var(--white);
+  border: 0.5px dashed var(--gray-200);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
