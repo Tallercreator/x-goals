@@ -151,23 +151,6 @@ function renderRow(tbody, row) {
       '</span>'
     : '<span class="row-chevron-spacer"></span>';
 
-  /* Вес — только для level 0 */
-  var weightHtml = '';
-  if (row.level === 0) {
-    var base = row.goalWeight || (row.weights && row.weights[0]) || '—';
-    var multi = row.owners && row.owners.length > 1;
-    weightHtml =
-      '<span class="weight-cell">' +
-        '<span class="weight-badge">' + base + '</span>' +
-        (multi
-          ? '<span class="weight-tip-wrap">' +
-              '<i class="ti ti-info-circle weight-tip-ic"></i>' +
-              '<span class="weight-tip">Это вес цели в проекте. У каждого исполнителя свой индивидуальный вес участия — смотрите внутри цели</span>' +
-            '</span>'
-          : '') +
-      '</span>';
-  }
-
   tr.innerHTML =
     '<td class="td-name">' +
       '<div class="indent-line-wrap">' + indent + '</div>' +
@@ -180,7 +163,6 @@ function renderRow(tbody, row) {
         '</div>' +
       '</div>' +
     '</td>' +
-    '<td class="td-weight">' + weightHtml + '</td>' +
     '<td class="td-plan">' + (row.plan || '—') + '</td>' +
     '<td class="td-fact td-fact--' + row.factClass + '">' + (row.fact || '—') + '</td>' +
     '<td class="td-arrow" data-act="nav"><i class="ti ti-chevron-right"></i></td>';
@@ -235,7 +217,7 @@ function render() {
     table.className = 'goals-table';
     table.innerHTML =
       '<thead><tr>' +
-        '<th>Название</th><th>Вес</th>' +
+        '<th>Название</th>' +
         '<th class="right">План</th><th class="right">Факт</th><th></th>' +
       '</tr></thead>';
 
@@ -250,7 +232,7 @@ function render() {
       if (idx < q.rows.length - 1 && shown < limit) {
         var sep = document.createElement('tr');
         sep.className = 'tr-sep';
-        sep.innerHTML = '<td colspan="5"></td>';
+        sep.innerHTML = '<td colspan="4"></td>';
         tbody.appendChild(sep);
       }
     });
@@ -258,7 +240,7 @@ function render() {
     if (!showAllMap[q.id] && q.rows.length > SHOW_LIMIT) {
       var more = document.createElement('tr');
       more.className = 'show-more-tr';
-      more.innerHTML = '<td colspan="5">+ ещё ' + (q.rows.length - SHOW_LIMIT) + ' целей</td>';
+      more.innerHTML = '<td colspan="4">+ ещё ' + (q.rows.length - SHOW_LIMIT) + ' целей</td>';
       more.onclick = (function (qid) { return function () { showAllMap[qid] = true; render(); }; })(q.id);
       tbody.appendChild(more);
     }
