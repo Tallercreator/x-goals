@@ -1,0 +1,355 @@
+/* =========================================================================
+   OTP Space — Global styles
+   Структура:
+     1. Дизайн-токены (CSS-переменные)
+     2. Reset
+     3. Browser chrome (декоративная рамка окна)
+     4. App shell (sidebar + main + topnav)
+     5. Теги типов целей (общие)
+     6. Утилиты
+     7. Стили страницы X-проекта (index.html)
+     8. Стили страницы цели (goal.html)
+   ========================================================================= */
+
+
+/* 1. ─── ТОКЕНЫ ──────────────────────────────────────────────────────── */
+:root {
+  /* Фиолетовый — акцент, владельцы, X-цели */
+  --purple-700:   #3C3489;
+  --purple-600:   #6a2cb5;
+  --purple-500:   #9e6fc3;
+  --purple-400:   #a06ec5;
+  --purple-300:   #AFA9EC;
+  --purple-50:    #EEEDFE;
+  --purple-25:    #f5f3ff;
+
+  /* Зелёный — выполнено / индивидуальные цели */
+  --green-700:    #27500A;
+  --green-500:    #639922;
+  --green-400:    #22c55e;
+  --green-300:    #4ade80;
+  --green-50:     #EAF3DE;
+
+  /* Оранжевый — в процессе */
+  --orange-700:   #633806;
+  --orange-600:   #854F0B;
+  --orange-500:   #EF9F27;
+  --orange-400:   #f59e0b;
+  --orange-50:    #FAEEDA;
+
+  /* Синий — планирование / командные цели */
+  --blue-700:     #0C447C;
+  --blue-600:     #3949AB;
+  --blue-500:     #3b82f6;
+  --blue-400:     #85B7EB;
+  --blue-50:      #E6F1FB;
+  --blue-25:      #E8EAF6;
+
+  /* Красный — высокий приоритет */
+  --red-600:      #ea2c45;
+  --red-50:       #fdeeef;
+
+  /* Жёлтый акцент логотипа */
+  --lime-300:     #cdfc68;
+
+  /* Нейтральные */
+  --gray-900:     #151617;
+  --gray-800:     #222;
+  --gray-700:     #374151;
+  --gray-600:     #525252;
+  --gray-500:     #717171;
+  --gray-400:     #9ca3af;
+  --gray-300:     #d1d5db;
+  --gray-200:     #e5e7eb;
+  --gray-150:     #eceff6;
+  --gray-100:     #f0f0f0;
+  --gray-50:      #f3f4f6;
+  --gray-25:      #f6f7fa;
+  --gray-10:      #f9fafb;
+  --white:        #fff;
+
+  /* Радиусы */
+  --radius-sm:    6px;
+  --radius-md:    10px;
+  --radius-lg:    12px;
+  --radius-xl:    16px;
+  --radius-2xl:   24px;
+  --radius-pill:  9999px;
+
+  /* Тени */
+  --shadow-window: 0 2px 24px rgba(0, 0, 0, .12);
+  --shadow-popup:  0 8px 24px rgba(0, 0, 0, .12);
+  --shadow-tip:    0 4px 12px rgba(0, 0, 0, .18);
+
+  /* Шрифт */
+  --font-sans: 'Onest', system-ui, -apple-system, sans-serif;
+  --font-system: system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --sidebar-w: 256px;
+  --topnav-h:  72px;
+  --browserbar-h: 44px;
+}
+
+
+/* 2. ─── RESET ──────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--gray-50);
+  font-family: var(--font-sans);
+  color: var(--gray-800);
+}
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+ul, ol { list-style-position: inside; }
+
+
+/* 3. ─── BROWSER CHROME ─────────────────────────────────────────────── */
+.browser-chrome {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-window);
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.browser-bar {
+  height: var(--browserbar-h);
+  background: var(--gray-50);
+  border-bottom: 0.5px solid rgba(0, 0, 0, .1);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.traffic { display: flex; gap: 6px; margin-right: 8px; }
+.traffic-dot { width: 12px; height: 12px; border-radius: 50%; }
+.traffic-dot--r { background: #ff5f57; }
+.traffic-dot--y { background: #ffbd2e; }
+.traffic-dot--g { background: #28c840; }
+
+.url-bar {
+  flex: 1;
+  max-width: 520px;
+  margin: 0 auto;
+  background: rgba(0, 0, 0, .06);
+  border-radius: var(--radius-sm);
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #4c4c4c;
+  font-family: var(--font-system);
+}
+
+
+/* 4. ─── APP SHELL ──────────────────────────────────────────────────── */
+.app {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--white);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  border-right: 0.5px solid var(--gray-100);
+}
+
+.logo-area {
+  height: var(--topnav-h);
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+}
+.logo-box {
+  background: var(--lime-300);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo-text {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--gray-800);
+}
+.logo-text em { font-style: italic; font-weight: 800; }
+
+.nav {
+  flex: 1;
+  padding: 12px 8px 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: var(--radius-lg);
+  font-size: 15px;
+  font-weight: 500;
+  color: #53565d;
+  transition: background .15s;
+}
+.nav-item:hover,
+.nav-item.is-active { background: var(--gray-50); }
+.nav-item .ti { font-size: 19px; color: #53565d; flex-shrink: 0; }
+
+.nav-sub {
+  background: var(--gray-150);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin: 2px 0;
+}
+.nav-sub-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #53565d;
+}
+.nav-sub-item.is-active { background: #e0e5f0; }
+
+.nav-sep {
+  height: 1px;
+  background: var(--gray-100);
+  margin: 6px 0;
+}
+
+.nav-bottom {
+  padding: 8px 8px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* Main column */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.topnav {
+  height: var(--topnav-h);
+  padding: 0 32px 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  border-bottom: 0.5px solid var(--gray-100);
+}
+.page-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.topnav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-lg);
+  background: var(--white);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: var(--gray-800);
+}
+.icon-btn:hover { background: var(--gray-50); }
+
+.notif-dot {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 8px;
+  height: 8px;
+  background: var(--purple-400);
+  border-radius: 50%;
+}
+
+.profile-av {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--gray-150);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #53565d;
+  cursor: pointer;
+}
+
+
+/* 5. ─── ТЕГИ ТИПОВ ЦЕЛЕЙ ──────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+.tag--ind { background: var(--green-50);  color: var(--green-700); }
+.tag--cmd { background: var(--blue-25);   color: var(--blue-600); }
+.tag--x   { background: var(--purple-50); color: var(--purple-700); }
+
+
+/* 6. ─── УТИЛИТЫ ──────────────────────────────────────────────────── */
+.divider {
+  height: 0.5px;
+  background: var(--gray-200);
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+/* 7. ─── СТРАНИЦА X-ПРОЕКТА (index.html) ──────────────────────────── */
+/* TODO: добавляется на этапе миграции index.html */
+
+
+/* 8. ─── СТРАНИЦА ЦЕЛИ (goal.html) ────────────────────────────────── */
+/* TODO: добавляется на этапе миграции goal.html */
