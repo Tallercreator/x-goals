@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Space — Цель</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+
+  <link rel="stylesheet" href="css/global.css">
+</head>
+<body class="goal-page">
+  <div class="browser-chrome">
+    <!-- Декоративная браузерная панель -->
+    <div class="browser-bar">
+      <div class="traffic">
+        <div class="traffic-dot traffic-dot--r"></div>
+        <div class="traffic-dot traffic-dot--y"></div>
+        <div class="traffic-dot traffic-dot--g"></div>
+      </div>
+      <div style="width:60px"></div>
+      <div class="url-bar">
+        <span style="font-size:11px">🔒</span>
+        <span style="font-size:12px;font-family:system-ui">otpspace.ru</span>
+      </div>
+    </div>
+
+    <div class="app">
+      <!-- ───────── Sidebar ───────── -->
+      <aside class="sidebar">
+        <div class="logo-area">
+          <div class="logo-box">
+            <div class="logo-text"><em>otp</em>space</div>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <a class="nav-item" href="#"><i class="ti ti-building"></i>Структура</a>
+          <a class="nav-item" href="#"><i class="ti ti-wallet"></i>Расчётные листки</a>
+          <a class="nav-item" href="#"><i class="ti ti-umbrella"></i>Отпуск</a>
+          <a class="nav-item" href="#"><i class="ti ti-file-text"></i>Заявки</a>
+          <a class="nav-item" href="#"><i class="ti ti-bolt"></i>Новости</a>
+          <a class="nav-item" href="index.html"><i class="ti ti-target"></i>Командные цели</a>
+
+          <div class="nav-sub">
+            <a class="nav-sub-item is-active" href="#"><i class="ti ti-flag" style="font-size:17px"></i>Индивидуальные цели</a>
+            <a class="nav-sub-item" href="#" style="padding-left:14px;font-size:14px"><i class="ti ti-user" style="font-size:15px"></i>Мои цели</a>
+          </div>
+
+          <div class="nav-sep"></div>
+          <a class="nav-item" href="#"><i class="ti ti-link"></i>Быстрые ссылки</a>
+        </nav>
+      </aside>
+
+      <!-- ───────── Main ───────── -->
+      <main class="main">
+        <header class="topnav">
+          <div class="page-title" id="page-title">Индивидуальные цели</div>
+          <div class="topnav-right">
+            <button class="icon-btn" aria-label="Поиск"><i class="ti ti-search" style="font-size:17px"></i></button>
+            <button class="icon-btn" aria-label="Уведомления"><i class="ti ti-bell" style="font-size:17px"></i><span class="notif-dot"></span></button>
+            <div class="profile-av" title="Константин">К</div>
+          </div>
+        </header>
+
+        <!-- Квартальные табы + stepper согласования -->
+        <div class="nav-bar">
+          <div class="qnav">
+            <button class="year-btn">2024 <i class="ti ti-chevron-down" style="font-size:13px"></i></button>
+            <button class="arr-btn"><i class="ti ti-chevron-left"></i></button>
+            <div class="q-tabs">
+              <div class="q-tab" onclick="selQ(0)">
+                <div class="q-tab-inner"><span class="q-label">Q1</span><span class="q-badge" style="background:var(--purple-400)">оценка</span></div>
+                <div class="q-line"></div>
+              </div>
+              <div class="q-tab is-active" onclick="selQ(1)">
+                <div class="q-tab-inner"><span class="q-label">Q2</span><span class="q-badge" style="background:#f4a883">план</span></div>
+                <div class="q-line"></div>
+              </div>
+            </div>
+            <button class="arr-btn"><i class="ti ti-chevron-right"></i></button>
+          </div>
+
+          <div class="stepper">
+            <div class="step">
+              <div class="step-date">08.05.2024</div>
+              <div class="step-row">
+                <div class="sc sc--done"><i class="ti ti-check" style="font-size:10px"></i></div>
+                <div><div class="step-name">Постановка целей</div><div class="step-sub">Сергиенко А.В.</div></div>
+              </div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+              <div><span class="step-date--active">до 08.05.2024</span></div>
+              <div class="step-row">
+                <div class="sc sc--cur"></div>
+                <div><div class="step-name" style="font-weight:600">Согласование</div><div class="step-sub">Дмитриев К.У.</div></div>
+              </div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+              <div class="step-date--disabled">до 08.05.2024</div>
+              <div class="step-row">
+                <div class="sc sc--todo"></div>
+                <div><div class="step-name" style="color:var(--gray-500);font-size:14px">Завершение<br>постановки целей</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Хлебные крошки навигации по дереву -->
+        <div class="tree-nav" id="tree-nav"></div>
+
+        <div class="goal-content">
+          <div class="col-headers">
+            <span>Цели</span>
+            <span>Вес</span>
+            <span></span>
+          </div>
+          <div id="goals-area"></div>
+        </div>
+
+        <div class="bottom-bar">
+          <div class="icon-square"><i class="ti ti-file-description" style="font-size:19px;color:var(--purple-400)"></i></div>
+          <button class="withdraw-btn">Отозвать с согласования</button>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/goal.js"></script>
+</body>
+</html>

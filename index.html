@@ -69,23 +69,129 @@
         <header class="topnav">
           <div class="page-title">X-проекты</div>
           <div class="topnav-right">
-            <button class="icon-btn" aria-label="Поиск"><i class="ti ti-search" style="font-size:17px"></i></button>
-            <button class="icon-btn" aria-label="Уведомления"><i class="ti ti-bell" style="font-size:17px"></i><span class="notif-dot"></span></button>
-            <div class="profile-av" title="Константин">К</div>
+            <div class="assistant-block">
+              <div class="assistant-avatar">🤖</div>
+              <div class="assistant-text">
+                <div class="t1">Ассистент</div>
+                <div class="t2">Спрашивайте, не стесняйтесь</div>
+              </div>
+            </div>
+            <div class="topnav-right" style="gap:8px">
+              <button class="icon-btn" aria-label="Поиск"><i class="ti ti-search" style="font-size:18px"></i></button>
+              <button class="icon-btn" aria-label="Уведомления"><i class="ti ti-bell" style="font-size:18px"></i><span class="notif-dot"></span></button>
+            </div>
+            <div class="profile">
+              <div class="profile-av">К</div>
+              <div class="profile-name">Константин</div>
+            </div>
           </div>
         </header>
 
-        <!-- Здесь будет основной контент страницы X-проекта.
-             Добавляется на следующем шаге миграции. -->
-        <section style="flex:1;display:flex;align-items:center;justify-content:center;color:var(--gray-400);font-size:14px">
-          Контент страницы X-проекта — следующий шаг
-        </section>
+        <div class="content">
+          <div class="card-wrap">
+            <!-- Главная колонка -->
+            <div class="main-col">
+              <div>
+                <button class="expand-btn"><i class="ti ti-arrows-maximize" style="font-size:16px"></i>Развернуть</button>
+                <div class="proj-title">Адаптация новичка за 7 дней</div>
+              </div>
+
+              <div>
+                <div class="section-label">Описание проекта</div>
+                <div class="proj-desc">
+                  Обеспечить полное погружение нового сотрудника в рабочие процессы, корпоративную культуру
+                  и профессиональные задачи в течение первой недели. За 7 дней новичок должен выйти на базовый
+                  уровень самостоятельности: понимать структуру компании, знать ключевых коллег, владеть
+                  необходимыми инструментами и приступить к выполнению первых задач с минимальной поддержкой.
+                </div>
+              </div>
+
+              <div>
+                <div class="section-label">DOS проекта</div>
+                <ul class="dos-list">
+                  <li>Новичок по итогам 7 дней оценивает свою готовность к работе не ниже 7 из 10.</li>
+                  <li>Выполнены все пункты чек-листа адаптации.</li>
+                  <li>Получена положительная обратная связь от наставника и руководителя.</li>
+                  <li>Сотрудник способен самостоятельно выполнять базовые задачи по своей роли.</li>
+                </ul>
+              </div>
+
+              <div>
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+                  <div class="section-label" style="margin-bottom:0">Цели проекта</div>
+                  <button class="add-goal-row"><i class="ti ti-plus" style="font-size:14px"></i>Добавить цели</button>
+                </div>
+                <div id="goals-section"></div>
+              </div>
+
+              <div class="bottom-actions">
+                <button class="btn-primary">Удалить цель</button>
+                <button class="btn-secondary">Редактировать</button>
+              </div>
+            </div>
+
+            <!-- Правая колонка -->
+            <aside class="side-col">
+              <span class="priority-tag">
+                <i class="ti ti-circle-filled" style="font-size:10px"></i>Высокий приоритет
+              </span>
+
+              <div>
+                <div class="owner-block" style="margin-bottom:10px">
+                  <div class="av-lg">РН</div>
+                  <div>
+                    <div class="owner-name">Рощина Наталья</div>
+                    <div class="owner-meta">
+                      <span>HR Tech</span>
+                      <span class="owner-role">Владелец</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div style="margin-top:10px">
+                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+                    <div class="av-stack" id="co-stack"></div>
+                    <span style="font-size:13px;color:var(--gray-700);font-weight:500" id="co-summary-text"></span>
+                  </div>
+                  <button class="co-expand-btn" onclick="toggleCoowners()">
+                    <i class="ti ti-chevron-down" style="font-size:13px" id="co-expand-ic"></i>
+                    <span id="co-expand-label">Показать всех</span>
+                  </button>
+                  <div class="co-full" id="co-full"></div>
+                </div>
+              </div>
+
+              <div class="meta-field">
+                <div class="meta-label">Редактор</div>
+                <div class="meta-value">Павленова Светлана | HR</div>
+              </div>
+
+              <div class="meta-row">
+                <div class="meta-field">
+                  <div class="meta-label">Срок реализации</div>
+                  <div class="meta-value">30.12.2026</div>
+                </div>
+                <div class="meta-field">
+                  <div class="meta-label">Дата создания</div>
+                  <div class="meta-value">1.02.2026</div>
+                </div>
+              </div>
+
+              <div class="meta-field">
+                <div class="meta-label">Проектная документация</div>
+                <a href="#" class="meta-link">https://confluence.otpbank.ru/pages/viewpage.action?pageId=598416688</a>
+              </div>
+            </aside>
+          </div>
+        </div>
       </main>
     </div>
   </div>
 
-  <!-- <script src="js/data.js"></script> -->
-  <!-- <script src="js/popup.js"></script> -->
-  <!-- <script src="js/project.js"></script> -->
+  <script src="js/data.js"></script>
+  <script src="js/popup.js"></script>
+  <script src="js/project.js"></script>
 </body>
 </html>
