@@ -525,7 +525,7 @@ ul, ol { list-style-position: inside; }
 .goals-table td { padding: 0; vertical-align: middle; }
 
 .td-name {
-  padding: 9px 12px;
+  padding: 24px 12px;
   display: flex;
   align-items: flex-start;
   min-width: 0;
@@ -857,7 +857,7 @@ ul, ol { list-style-position: inside; }
 
 .td-plan,
 .td-fact {
-  padding: 9px 12px;
+  padding: 24px 12px;
   font-size: 12px;
   white-space: nowrap;
   text-align: right;
@@ -869,7 +869,7 @@ ul, ol { list-style-position: inside; }
 .td-fact--empty { color: var(--gray-400); }
 
 .td-arrow {
-  padding: 6px 8px;
+  padding: 24px 8px;
   text-align: right;
   width: 32px;
   cursor: pointer;
