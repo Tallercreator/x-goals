@@ -22,9 +22,9 @@
   if (fieldsInd) fieldsInd.hidden = isCmd;
   if (fieldsCmd) fieldsCmd.hidden = !isCmd;
 
-  /* Текст кнопки submit (по макету: индив. — «Создать цель», команд. — «Изменить цель») */
+  /* Текст кнопки submit */
   var submit = document.getElementById('f-submit');
-  if (submit) submit.textContent = isCmd ? 'Изменить цель' : 'Создать цель';
+  if (submit) submit.textContent = isCmd ? 'Добавить цель' : 'Создать цель';
 
   /* ── Навигация ── */
   function goBack() { window.location.href = 'index.html'; }
