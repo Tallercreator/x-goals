@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 
-  <link rel="stylesheet" href="css/global.css?v=11">
+  <link rel="stylesheet" href="css/global.css?v=12">
 </head>
 <body>
   <div class="browser-chrome">
@@ -70,7 +70,7 @@
             <div class="form-inner">
 
               <div class="form-head">
-                <a class="expand-btn" href="index.html"><i class="ti ti-arrow-left" style="font-size:16px"></i>Развернуть</a>
+                <a class="expand-btn" href="index.html"><i class="ti ti-arrows-maximize" style="font-size:16px"></i>Развернуть</a>
                 <h1 class="form-title" id="form-title">Создание индивидуальной цели</h1>
               </div>
 
@@ -97,7 +97,9 @@ NPS со стороны наставников — не ниже 50.
                 <label class="form-label" for="f-dod">План действий (Definition of Done)</label>
                 <textarea class="form-textarea" id="f-dod" maxlength="5000" rows="5">Медианная продолжительность адаптации — не более 45 рабочих дней (подтверждено данными HRM).
 85%+ новичков успешно проходят аттестацию с первой попытки.
-NPS процесса адаптации со стороны новичков — не ниже 60.</textarea>
+NPS процесса адаптации со стороны новичков — не ниже 60.
+NPS со стороны наставников — не ниже 50.
+Отток на испытательном сроке снижен минимум на 30% относительно базового периода.</textarea>
                 <div class="form-help">Макс: 5 000 симв.</div>
               </div>
 
@@ -176,14 +178,13 @@ NPS процесса адаптации со стороны новичков —
                 </div>
               </div>
 
-              <!-- Родительская цель -->
+              <!-- Х-проект -->
               <div class="form-field">
-                <label class="form-label" for="f-parent">Родительская цель</label>
+                <label class="form-label" for="f-xproject">Х-проект</label>
                 <div class="form-select-wrap">
-                  <select class="form-select" id="f-parent">
+                  <select class="form-select" id="f-xproject">
                     <option>Адаптация новичка за 7 дней</option>
-                    <option>Сократить время адаптации с 90 до 45 рабочих дней</option>
-                    <option>— Без родительской цели —</option>
+                    <option>— Без X-проекта —</option>
                   </select>
                   <i class="ti ti-chevron-down form-select-ic"></i>
                 </div>
@@ -202,6 +203,6 @@ NPS процесса адаптации со стороны новичков —
     </div>
   </div>
 
-  <script src="js/goal-form.js?v=11"></script>
+  <script src="js/goal-form.js?v=12"></script>
 </body>
 </html>
