@@ -5,6 +5,7 @@
 
 var SHOW_LIMIT = 5;
 var showAllMap = {};
+var collapsedQ = {};   /* свёрнутые кварталы: id → true */
 
 
 /* ───────── Глубина и размер поддерева ───────── */
@@ -34,6 +35,14 @@ function pluralSub(n) {
   if (d10 === 1 && d100 !== 11) return 'подцель';
   if (d10 >= 2 && d10 <= 4 && (d100 < 10 || d100 >= 20)) return 'подцели';
   return 'подцелей';
+}
+
+/* Склонение «цель» по числу */
+function pluralGoal(n) {
+  var d10 = n % 10, d100 = n % 100;
+  if (d10 === 1 && d100 !== 11) return 'цель';
+  if (d10 >= 2 && d10 <= 4 && (d100 < 10 || d100 >= 20)) return 'цели';
+  return 'целей';
 }
 
 
@@ -248,12 +257,21 @@ function render() {
     var block = document.createElement('div');
     block.className = 'quarter-block';
 
+    var isCollapsed = !!collapsedQ[q.id];
+
     var heading = document.createElement('div');
-    heading.className = 'quarter-heading';
+    heading.className = 'quarter-heading' + (isCollapsed ? ' is-collapsed' : '');
     heading.innerHTML =
+      '<i class="ti ti-chevron-' + (isCollapsed ? 'right' : 'down') + ' qh-chevron"></i>' +
       '<span class="qh-label">' + q.label + '</span>' +
-      '<span class="qh-status" style="background:' + q.sc + ';color:' + q.st + '">Статус «' + q.status + '»</span>';
+      '<span class="qh-status" style="background:' + q.sc + ';color:' + q.st + '">Статус «' + q.status + '»</span>' +
+      '<span class="qh-count">' + q.rows.length + ' ' + pluralGoal(q.rows.length) + '</span>';
+    heading.onclick = (function (qid) {
+      return function () { collapsedQ[qid] = !collapsedQ[qid]; render(); };
+    })(q.id);
     block.appendChild(heading);
+
+    if (isCollapsed) { section.appendChild(block); return; }
 
     var table = document.createElement('table');
     table.className = 'goals-table';
