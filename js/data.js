@@ -66,7 +66,52 @@ window.QUARTERS = [
                 name: 'Обучение ассистента новой программе',
                 owners: ['Симоненко Сергей | IT'], weights: ['30%'],
                 plan: '100%', fact: '✓', factClass: 'ok',
-                hasChildren: false, children: [],
+                hasChildren: true, open: false,
+                children: [
+                  {
+                    id: 'g1kb', level: 3, type: 'cmd',
+                    name: 'Сбор и разметка базы знаний',
+                    owners: ['Команда 2 | IT'], weights: ['40%'],
+                    plan: '100%', fact: '70%', factClass: 'ok',
+                    hasChildren: true, open: false,
+                    children: [
+                      {
+                        id: 'g1kb1', level: 4, type: 'cmd',
+                        name: 'Подготовка обучающего датасета',
+                        owners: ['Команда 2 | IT'], weights: ['50%'],
+                        plan: '100%', fact: '80%', factClass: 'ok',
+                        hasChildren: true, open: false,
+                        children: [
+                          {
+                            id: 'g1kb2', level: 5, type: 'cmd',
+                            name: 'Разметка эталонных диалогов',
+                            owners: ['Команда 4 | IT'], weights: ['60%'],
+                            plan: '100%', fact: '50%', factClass: 'ok',
+                            hasChildren: true, open: false,
+                            children: [
+                              {
+                                id: 'g1kb3', level: 6, type: 'cmd',
+                                name: 'Контроль качества разметки',
+                                owners: ['Команда 4 | IT'], weights: ['100%'],
+                                plan: '100%', fact: '30%', factClass: 'ok',
+                                hasChildren: true, open: false,
+                                children: [
+                                  {
+                                    id: 'g1kb4', level: 7, type: 'cmd',
+                                    name: 'Аудит финальной разметки',
+                                    owners: ['Команда 4 | IT'], weights: ['100%'],
+                                    plan: '100%', fact: '—', factClass: 'empty',
+                                    hasChildren: false, children: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
               },
             ],
           },

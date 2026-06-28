@@ -7,6 +7,36 @@ var SHOW_LIMIT = 5;
 var showAllMap = {};
 
 
+/* ───────── Глубина и размер поддерева ───────── */
+
+/* Максимальная глубина вложенности под строкой (0 = нет детей) */
+function subtreeDepth(row) {
+  if (!row.children || !row.children.length) return 0;
+  var max = 0;
+  row.children.forEach(function (c) {
+    var d = subtreeDepth(c);
+    if (d > max) max = d;
+  });
+  return max + 1;
+}
+
+/* Всего потомков под строкой (все уровни) */
+function descendantCount(row) {
+  if (!row.children || !row.children.length) return 0;
+  var n = 0;
+  row.children.forEach(function (c) { n += 1 + descendantCount(c); });
+  return n;
+}
+
+/* Склонение «подцель» по числу */
+function pluralSub(n) {
+  var d10 = n % 10, d100 = n % 100;
+  if (d10 === 1 && d100 !== 11) return 'подцель';
+  if (d10 >= 2 && d10 <= 4 && (d100 < 10 || d100 >= 20)) return 'подцели';
+  return 'подцелей';
+}
+
+
 /* ───────── Со-владельцы проекта (правая панель) ───────── */
 
 function renderCoowners() {
@@ -144,6 +174,18 @@ function renderRow(tbody, row) {
   tr.className = 'tr-l' + Math.min(row.level, 2);
   tr.dataset.id = row.id;
 
+  /* Бейдж глубины поддерева: «⤵ 7 ур. · 8 подцелей» */
+  var depthBadge = '';
+  if (row.hasChildren) {
+    var depth = subtreeDepth(row);
+    var total = descendantCount(row);
+    depthBadge =
+      '<span class="depth-badge" title="Глубина вложенности и число подцелей">' +
+        '<i class="ti ti-corner-right-down"></i>' + depth + ' ур.' +
+        '<span class="depth-badge-sep">·</span>' + total + ' ' + pluralSub(total) +
+      '</span>';
+  }
+
   /* Шеврон / спейсер */
   var chevron = row.hasChildren
     ? '<span class="row-chevron" data-act="toggle">' +
@@ -157,7 +199,7 @@ function renderRow(tbody, row) {
       '<div style="display:flex;align-items:flex-start;gap:0;flex:1;min-width:0">' +
         chevron +
         '<div class="row-inner">' +
-          '<div class="row-tags">' + tagHtml(row.type, row.tags) + '</div>' +
+          '<div class="row-tags">' + tagHtml(row.type, row.tags) + depthBadge + '</div>' +
           '<div class="row-name' + (row.level > 0 ? ' row-name--l1' : '') + '">' + row.name + '</div>' +
           '<div class="row-owners">' + ownerCellHtml(row) + '</div>' +
         '</div>' +
