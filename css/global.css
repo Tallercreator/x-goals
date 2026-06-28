@@ -522,7 +522,7 @@ ul, ol { list-style-position: inside; }
   cursor: pointer;
 }
 
-.goals-table td { padding: 0; vertical-align: middle; }
+.goals-table td { vertical-align: middle; }
 
 .td-name {
   padding: 24px 12px;
