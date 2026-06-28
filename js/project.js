@@ -357,9 +357,7 @@ function goToGoal(goalId, goalName) {
   if (submitBtn) submitBtn.onclick = function () {
     var sel = modal.querySelector('input[name="goalType"]:checked');
     var type = sel ? sel.value : 'cmd';
-    /* Заглушка: страницы создания цели пока нет */
-    console.log('Создание цели, тип:', type);
-    close();
+    window.location.href = 'goal-form.html?type=' + type;
   };
 })();
 

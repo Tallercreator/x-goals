@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OTP Space — Создание цели</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+
+  <link rel="stylesheet" href="css/global.css?v=11">
+</head>
+<body>
+  <div class="browser-chrome">
+    <div class="browser-bar">
+      <div class="traffic">
+        <div class="traffic-dot traffic-dot--r"></div>
+        <div class="traffic-dot traffic-dot--y"></div>
+        <div class="traffic-dot traffic-dot--g"></div>
+      </div>
+      <div style="width:60px"></div>
+      <div class="url-bar">
+        <span style="font-size:11px">🔒</span>
+        <span style="font-size:12px;font-family:system-ui">otpspace.ru</span>
+      </div>
+    </div>
+
+    <div class="app">
+      <!-- ───────── Sidebar ───────── -->
+      <aside class="sidebar">
+        <div class="logo-area">
+          <div class="logo-box"><div class="logo-text"><em>otp</em>space</div></div>
+        </div>
+        <nav class="nav">
+          <a class="nav-item" href="#"><i class="ti ti-home"></i>Главная</a>
+          <a class="nav-item" href="#"><i class="ti ti-building"></i>Структура</a>
+          <a class="nav-item" href="#"><i class="ti ti-wallet"></i>Расчётные листки</a>
+          <a class="nav-item" href="#"><i class="ti ti-umbrella"></i>Отпуск</a>
+          <a class="nav-item" href="#"><i class="ti ti-file-text"></i>Заявки</a>
+          <a class="nav-item" href="#"><i class="ti ti-bolt"></i>Новости</a>
+          <div class="nav-sep"></div>
+          <a class="nav-item is-active" href="index.html"><i class="ti ti-target"></i>Командные цели</a>
+          <a class="nav-item" style="padding-left:36px;font-size:15px" href="index.html"><i class="ti ti-crosshair"></i>Х-проекты</a>
+          <a class="nav-item" style="padding-left:36px;font-size:15px" href="#"><i class="ti ti-users-group"></i>Цели трайба</a>
+          <a class="nav-item" style="padding-left:36px;font-size:15px" href="#"><i class="ti ti-users"></i>Мои команды</a>
+          <a class="nav-item" href="goal.html"><i class="ti ti-flag"></i>Индивидуальные цели</a>
+        </nav>
+        <div class="nav-bottom">
+          <div class="divider"></div>
+          <a class="nav-item" href="#"><i class="ti ti-link"></i>Быстрые ссылки</a>
+          <a class="nav-item" href="#"><i class="ti ti-headphones"></i>Поддержка</a>
+        </div>
+      </aside>
+
+      <!-- ───────── Main ───────── -->
+      <main class="main">
+        <header class="topnav">
+          <div class="page-title">Банк целей</div>
+          <div class="topnav-right">
+            <button class="icon-btn" aria-label="Поиск"><i class="ti ti-search" style="font-size:17px"></i></button>
+            <button class="icon-btn" aria-label="Уведомления"><i class="ti ti-bell" style="font-size:17px"></i><span class="notif-dot"></span></button>
+            <div class="profile-av" title="Константин">К</div>
+          </div>
+        </header>
+
+        <div class="form-content">
+          <div class="form-card">
+            <div class="form-inner">
+
+              <div class="form-head">
+                <a class="expand-btn" href="index.html"><i class="ti ti-arrow-left" style="font-size:16px"></i>Развернуть</a>
+                <h1 class="form-title" id="form-title">Создание индивидуальной цели</h1>
+              </div>
+
+              <!-- Название -->
+              <div class="form-field">
+                <label class="form-label" for="f-name">Название цели</label>
+                <input class="form-input" id="f-name" type="text"
+                       placeholder="Сократить время адаптации с 90 до 45 рабочих дней">
+              </div>
+
+              <!-- DoS -->
+              <div class="form-field">
+                <label class="form-label" for="f-dos">Цель и ожидаемый результат (Definition of Success)</label>
+                <textarea class="form-textarea" id="f-dos" maxlength="5000" rows="5">Медианная продолжительность адаптации — не более 45 рабочих дней (подтверждено данными HRM).
+85%+ новичков успешно проходят аттестацию с первой попытки.
+NPS процесса адаптации со стороны новичков — не ниже 60.
+NPS со стороны наставников — не ниже 50.
+Отток на испытательном сроке снижен минимум на 30% относительно базового периода.</textarea>
+                <div class="form-help">Макс: 5 000 симв.</div>
+              </div>
+
+              <!-- DoD -->
+              <div class="form-field">
+                <label class="form-label" for="f-dod">План действий (Definition of Done)</label>
+                <textarea class="form-textarea" id="f-dod" maxlength="5000" rows="5">Медианная продолжительность адаптации — не более 45 рабочих дней (подтверждено данными HRM).
+85%+ новичков успешно проходят аттестацию с первой попытки.
+NPS процесса адаптации со стороны новичков — не ниже 60.</textarea>
+                <div class="form-help">Макс: 5 000 симв.</div>
+              </div>
+
+              <!-- Тип цели / Единица измерения -->
+              <div class="form-row">
+                <div class="form-field">
+                  <label class="form-label" for="f-type">Тип цели</label>
+                  <div class="form-select-wrap">
+                    <select class="form-select" id="f-type">
+                      <option>Количественная</option>
+                      <option>Качественная</option>
+                    </select>
+                    <i class="ti ti-chevron-down form-select-ic"></i>
+                  </div>
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="f-unit">Единица измерения</label>
+                  <div class="form-select-wrap">
+                    <select class="form-select" id="f-unit">
+                      <option>Дни</option>
+                      <option>%</option>
+                      <option>шт.</option>
+                    </select>
+                    <i class="ti ti-chevron-down form-select-ic"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- План / Вес -->
+              <div class="form-row">
+                <div class="form-field">
+                  <label class="form-label" for="f-plan">План</label>
+                  <input class="form-input" id="f-plan" type="text" value="45">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="f-weight">Вес, %</label>
+                  <input class="form-input" id="f-weight" type="text" value="20%">
+                </div>
+              </div>
+
+              <!-- Период -->
+              <div class="form-field">
+                <label class="form-label" for="f-period">Период</label>
+                <div class="form-select-wrap">
+                  <select class="form-select" id="f-period">
+                    <option>Q2, 2026</option>
+                    <option>Q1, 2026</option>
+                    <option>Q3, 2026</option>
+                  </select>
+                  <i class="ti ti-chevron-down form-select-ic"></i>
+                </div>
+              </div>
+
+              <!-- Исполнитель -->
+              <div class="form-field">
+                <label class="form-label" for="f-assignee">Исполнитель</label>
+                <div class="form-select-wrap">
+                  <select class="form-select" id="f-assignee">
+                    <option>Симоненко Сергей</option>
+                    <option>Рощина Наталья</option>
+                    <option>Балев Александр</option>
+                  </select>
+                  <i class="ti ti-chevron-down form-select-ic"></i>
+                </div>
+              </div>
+
+              <!-- Владелец цели -->
+              <div class="form-field">
+                <label class="form-label" for="f-owner">Владелец цели</label>
+                <div class="form-select-wrap">
+                  <select class="form-select" id="f-owner">
+                    <option>Рощина Наталья</option>
+                    <option>Симоненко Сергей</option>
+                  </select>
+                  <i class="ti ti-chevron-down form-select-ic"></i>
+                </div>
+              </div>
+
+              <!-- Родительская цель -->
+              <div class="form-field">
+                <label class="form-label" for="f-parent">Родительская цель</label>
+                <div class="form-select-wrap">
+                  <select class="form-select" id="f-parent">
+                    <option>Адаптация новичка за 7 дней</option>
+                    <option>Сократить время адаптации с 90 до 45 рабочих дней</option>
+                    <option>— Без родительской цели —</option>
+                  </select>
+                  <i class="ti ti-chevron-down form-select-ic"></i>
+                </div>
+              </div>
+
+              <!-- Кнопки -->
+              <div class="form-actions">
+                <button class="btn-primary" id="f-submit">Создать цель</button>
+                <button class="btn-secondary" id="f-cancel">Отменить</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/goal-form.js?v=11"></script>
+</body>
+</html>
