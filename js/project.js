@@ -37,6 +37,14 @@ function pluralSub(n) {
   return 'подцелей';
 }
 
+/* Склонение «дочерних (целей)» по числу */
+function pluralChild(n) {
+  var d10 = n % 10, d100 = n % 100;
+  if (d10 === 1 && d100 !== 11) return 'дочерняя';
+  if (d10 >= 2 && d10 <= 4 && (d100 < 10 || d100 >= 20)) return 'дочерние';
+  return 'дочерних';
+}
+
 /* Склонение «цель» по числу */
 function pluralGoal(n) {
   var d10 = n % 10, d100 = n % 100;
@@ -48,45 +56,45 @@ function pluralGoal(n) {
 
 /* ───────── Со-владельцы проекта (правая панель) ───────── */
 
-function renderCoowners() {
-  var stack = document.getElementById('co-stack');
-  stack.innerHTML = '';
-  var n = Math.min(5, COOWNERS.length);
-  for (var i = 0; i < n; i++) {
-    var d = document.createElement('div');
-    d.className = 'av-sm';
-    d.style.fontSize = '11px';
-    d.textContent = COOWNERS[i].ini;
-    stack.appendChild(d);
-  }
-  if (COOWNERS.length > 5) {
-    var cnt = document.createElement('div');
-    cnt.className = 'av-count';
-    cnt.textContent = '+' + (COOWNERS.length - 5);
-    stack.appendChild(cnt);
-  }
-  document.getElementById('co-summary-text').textContent = COOWNERS.length + ' со-владельцев';
+var CO_VISIBLE = 3;     /* сколько со-владельцев видно до раскрытия */
+var coOpen = false;
 
-  var full = document.getElementById('co-full');
-  full.innerHTML = '';
-  COOWNERS.forEach(function (c) {
-    var row = document.createElement('div');
-    row.className = 'co-item';
-    row.innerHTML =
-      '<div class="av-sm">' + c.ini + '</div>' +
-      '<div><div class="co-name">' + c.name + '</div>' +
-      '<div class="co-dept">' + c.dept + '</div></div>';
-    full.appendChild(row);
-  });
+/* Склонение «совладелец» по числу */
+function pluralCoowner(n) {
+  var d10 = n % 10, d100 = n % 100;
+  if (d10 === 1 && d100 !== 11) return 'совладелец';
+  if (d10 >= 2 && d10 <= 4 && (d100 < 10 || d100 >= 20)) return 'совладельца';
+  return 'совладельцев';
 }
 
-var coOpen = false;
-window.toggleCoowners = function () {
-  coOpen = !coOpen;
-  document.getElementById('co-full').className = 'co-full' + (coOpen ? ' is-open' : '');
-  document.getElementById('co-expand-ic').style.transform = coOpen ? 'rotate(180deg)' : '';
-  document.getElementById('co-expand-label').textContent = coOpen ? 'Скрыть' : 'Показать всех';
-};
+function coRow(c) {
+  return '<div class="co-item">' +
+    '<div class="co-av">' + c.ini + '</div>' +
+    '<div class="co-info"><span class="co-name">' + c.name + '</span>' +
+    '<span class="co-dept">' + c.dept + '</span></div>' +
+  '</div>';
+}
+
+function renderCoowners() {
+  var list = document.getElementById('co-list');
+  if (!list) return;
+
+  var shown = coOpen ? COOWNERS.length : Math.min(CO_VISIBLE, COOWNERS.length);
+  var html = '';
+  for (var i = 0; i < shown; i++) html += coRow(COOWNERS[i]);
+
+  var rest = COOWNERS.length - CO_VISIBLE;
+  if (rest > 0) {
+    html += '<button class="co-more-btn" id="co-more-btn">' +
+      '<i class="ti ti-' + (coOpen ? 'minus' : 'plus') + '"></i>' +
+      (coOpen ? 'Скрыть' : 'ещё ' + rest + ' ' + pluralCoowner(rest)) +
+    '</button>';
+  }
+  list.innerHTML = html;
+
+  var btn = document.getElementById('co-more-btn');
+  if (btn) btn.onclick = function () { coOpen = !coOpen; renderCoowners(); };
+}
 
 
 /* ───────── Таблица целей ───────── */
@@ -103,12 +111,10 @@ function ownerCellHtml(row) {
   if (!row.owners || !row.owners.length) return '';
   var owner = row.owners[0];
   var coOwners = row.owners.slice(1);
-  var ownerName = owner.split('|')[0].trim();
-  var ownerIni = initials(ownerName);
   var ownerWeight = row.weights && row.weights[0]
     ? '<span class="owner-weight">' + row.weights[0] + '</span>' : '';
 
-  var html = '<span class="owner-av-xs">' + ownerIni + '</span>' +
+  var html = '<i class="ti ti-crown owner-crown"></i>' +
              '<span class="owner-label">' + owner + ownerWeight + '</span>';
 
   if (!coOwners.length) return html;
@@ -189,9 +195,9 @@ function renderRow(tbody, row) {
     var depth = subtreeDepth(row);
     var total = descendantCount(row);
     depthBadge =
-      '<span class="depth-badge" title="Глубина вложенности и число подцелей">' +
-        '<i class="ti ti-corner-right-down"></i>' + depth + ' ур.' +
-        '<span class="depth-badge-sep">·</span>' + total + ' ' + pluralSub(total) +
+      '<span class="depth-badge" title="Глубина вложенности и число дочерних целей">' +
+        '<i class="ti ti-chevron-down"></i>' + depth + ' ур.' +
+        '<span class="depth-badge-sep">|</span>' + total + ' ' + pluralChild(total) +
       '</span>';
   }
 
@@ -264,7 +270,7 @@ function render() {
     heading.innerHTML =
       '<i class="ti ti-chevron-' + (isCollapsed ? 'right' : 'down') + ' qh-chevron"></i>' +
       '<span class="qh-label">' + q.label + '</span>' +
-      '<span class="qh-status" style="background:' + q.sc + ';color:' + q.st + '">Статус «' + q.status + '»</span>' +
+      '<span class="qh-status" style="background:' + q.sc + ';color:' + q.st + '">' + q.status + '</span>' +
       '<span class="qh-count">' + q.rows.length + ' ' + pluralGoal(q.rows.length) + '</span>';
     heading.onclick = (function (qid) {
       return function () { collapsedQ[qid] = !collapsedQ[qid]; render(); };
@@ -321,5 +327,8 @@ function goToGoal(goalId, goalName) {
 
 
 /* ───────── Init ───────── */
+/* По умолчанию открыт только первый квартал, остальные свёрнуты */
+QUARTERS.forEach(function (q, i) { if (i > 0) collapsedQ[q.id] = true; });
+
 renderCoowners();
 render();

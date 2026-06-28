@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 
-  <link rel="stylesheet" href="css/global.css?v=7">
+  <link rel="stylesheet" href="css/global.css?v=9">
 </head>
 <body>
   <div class="browser-chrome">
@@ -125,7 +125,7 @@
               </div>
 
               <div class="bottom-actions">
-                <button class="btn-primary">Удалить цель</button>
+                <button class="btn-primary">Удалить проект</button>
                 <button class="btn-secondary">Редактировать</button>
               </div>
             </div>
@@ -133,11 +133,11 @@
             <!-- Правая колонка -->
             <aside class="side-col">
               <span class="priority-tag">
-                <i class="ti ti-circle-filled" style="font-size:10px"></i>Высокий приоритет
+                <i class="ti ti-exclamation-circle" style="font-size:13px"></i>Высокий приоритет
               </span>
 
-              <div>
-                <div class="owner-block" style="margin-bottom:10px">
+              <div class="owner-section">
+                <div class="owner-block">
                   <div class="av-lg">РН</div>
                   <div>
                     <div class="owner-name">Рощина Наталья</div>
@@ -150,22 +150,20 @@
 
                 <div class="divider"></div>
 
-                <div style="margin-top:10px">
-                  <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
-                    <div class="av-stack" id="co-stack"></div>
-                    <span style="font-size:13px;color:var(--gray-700);font-weight:500" id="co-summary-text"></span>
-                  </div>
-                  <button class="co-expand-btn" onclick="toggleCoowners()">
-                    <i class="ti ti-chevron-down" style="font-size:13px" id="co-expand-ic"></i>
-                    <span id="co-expand-label">Показать всех</span>
-                  </button>
-                  <div class="co-full" id="co-full"></div>
-                </div>
+                <!-- Список со-владельцев (рендерится из JS) -->
+                <div class="co-list" id="co-list"></div>
               </div>
 
               <div class="meta-field">
                 <div class="meta-label">Редактор</div>
                 <div class="meta-value">Павленова Светлана | HR</div>
+              </div>
+
+              <div class="meta-field">
+                <div class="meta-label">Статус</div>
+                <div class="status-value">
+                  <i class="ti ti-loader-2"></i><span>В работе</span>
+                </div>
               </div>
 
               <div class="meta-row">
@@ -190,8 +188,8 @@
     </div>
   </div>
 
-  <script src="js/data.js?v=7"></script>
-  <script src="js/popup.js?v=7"></script>
-  <script src="js/project.js?v=7"></script>
+  <script src="js/data.js?v=9"></script>
+  <script src="js/popup.js?v=9"></script>
+  <script src="js/project.js?v=9"></script>
 </body>
 </html>

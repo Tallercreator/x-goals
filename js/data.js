@@ -29,7 +29,7 @@ window.COOWNERS = [
 window.QUARTERS = [
   {
     id: 'q1', label: 'Q1 2026', status: 'Завершено',
-    sc: 'var(--green-50)', st: 'var(--green-700)',
+    sc: 'var(--gray-50)', st: 'var(--gray-500)',
     rows: [
       {
         id: 'g1', level: 0, type: 'ind',
