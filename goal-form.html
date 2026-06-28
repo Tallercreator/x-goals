@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 
-  <link rel="stylesheet" href="css/global.css?v=12">
+  <link rel="stylesheet" href="css/global.css?v=13">
 </head>
 <body>
   <div class="browser-chrome">
@@ -74,120 +74,213 @@
                 <h1 class="form-title" id="form-title">Создание индивидуальной цели</h1>
               </div>
 
-              <!-- Название -->
-              <div class="form-field">
-                <label class="form-label" for="f-name">Название цели</label>
-                <input class="form-input" id="f-name" type="text"
-                       placeholder="Сократить время адаптации с 90 до 45 рабочих дней">
-              </div>
+              <!-- ═══════ Поля индивидуальной цели ═══════ -->
+              <div class="form-fields" id="fields-ind">
+                <!-- Название -->
+                <div class="form-field">
+                  <label class="form-label" for="f-name">Название цели</label>
+                  <input class="form-input" id="f-name" type="text"
+                         placeholder="Сократить время адаптации с 90 до 45 рабочих дней">
+                </div>
 
-              <!-- DoS -->
-              <div class="form-field">
-                <label class="form-label" for="f-dos">Цель и ожидаемый результат (Definition of Success)</label>
-                <textarea class="form-textarea" id="f-dos" maxlength="5000" rows="5">Медианная продолжительность адаптации — не более 45 рабочих дней (подтверждено данными HRM).
+                <!-- DoS -->
+                <div class="form-field">
+                  <label class="form-label" for="f-dos">Цель и ожидаемый результат (Definition of Success)</label>
+                  <textarea class="form-textarea" id="f-dos" maxlength="5000" rows="5">Медианная продолжительность адаптации — не более 45 рабочих дней (подтверждено данными HRM).
 85%+ новичков успешно проходят аттестацию с первой попытки.
 NPS процесса адаптации со стороны новичков — не ниже 60.
 NPS со стороны наставников — не ниже 50.
 Отток на испытательном сроке снижен минимум на 30% относительно базового периода.</textarea>
-                <div class="form-help">Макс: 5 000 симв.</div>
-              </div>
+                  <div class="form-help">Макс: 5 000 симв.</div>
+                </div>
 
-              <!-- DoD -->
-              <div class="form-field">
-                <label class="form-label" for="f-dod">План действий (Definition of Done)</label>
-                <textarea class="form-textarea" id="f-dod" maxlength="5000" rows="5">Медианная продолжительность адаптации — не более 45 рабочих дней (подтверждено данными HRM).
+                <!-- DoD -->
+                <div class="form-field">
+                  <label class="form-label" for="f-dod">План действий (Definition of Done)</label>
+                  <textarea class="form-textarea" id="f-dod" maxlength="5000" rows="5">Медианная продолжительность адаптации — не более 45 рабочих дней (подтверждено данными HRM).
 85%+ новичков успешно проходят аттестацию с первой попытки.
 NPS процесса адаптации со стороны новичков — не ниже 60.
 NPS со стороны наставников — не ниже 50.
 Отток на испытательном сроке снижен минимум на 30% относительно базового периода.</textarea>
-                <div class="form-help">Макс: 5 000 симв.</div>
-              </div>
+                  <div class="form-help">Макс: 5 000 симв.</div>
+                </div>
 
-              <!-- Тип цели / Единица измерения -->
-              <div class="form-row">
+                <!-- Тип цели / Единица измерения -->
+                <div class="form-row">
+                  <div class="form-field">
+                    <label class="form-label" for="f-type">Тип цели</label>
+                    <div class="form-select-wrap">
+                      <select class="form-select" id="f-type"><option>Количественная</option><option>Качественная</option></select>
+                      <i class="ti ti-chevron-down form-select-ic"></i>
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="f-unit">Единица измерения</label>
+                    <div class="form-select-wrap">
+                      <select class="form-select" id="f-unit"><option>Дни</option><option>%</option><option>шт.</option></select>
+                      <i class="ti ti-chevron-down form-select-ic"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- План / Вес -->
+                <div class="form-row">
+                  <div class="form-field">
+                    <label class="form-label" for="f-plan">План</label>
+                    <input class="form-input" id="f-plan" type="text" value="45">
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="f-weight">Вес, %</label>
+                    <input class="form-input" id="f-weight" type="text" value="20%">
+                  </div>
+                </div>
+
+                <!-- Период -->
                 <div class="form-field">
-                  <label class="form-label" for="f-type">Тип цели</label>
+                  <label class="form-label" for="f-period">Период</label>
                   <div class="form-select-wrap">
-                    <select class="form-select" id="f-type">
-                      <option>Количественная</option>
-                      <option>Качественная</option>
-                    </select>
+                    <select class="form-select" id="f-period"><option>Q2, 2026</option><option>Q1, 2026</option><option>Q3, 2026</option></select>
                     <i class="ti ti-chevron-down form-select-ic"></i>
                   </div>
                 </div>
+
+                <!-- Исполнитель -->
                 <div class="form-field">
-                  <label class="form-label" for="f-unit">Единица измерения</label>
+                  <label class="form-label" for="f-assignee">Исполнитель</label>
                   <div class="form-select-wrap">
-                    <select class="form-select" id="f-unit">
-                      <option>Дни</option>
-                      <option>%</option>
-                      <option>шт.</option>
-                    </select>
+                    <select class="form-select" id="f-assignee"><option>Симоненко Сергей</option><option>Рощина Наталья</option><option>Балев Александр</option></select>
+                    <i class="ti ti-chevron-down form-select-ic"></i>
+                  </div>
+                </div>
+
+                <!-- Владелец цели -->
+                <div class="form-field">
+                  <label class="form-label" for="f-owner">Владелец цели</label>
+                  <div class="form-select-wrap">
+                    <select class="form-select" id="f-owner"><option>Рощина Наталья</option><option>Симоненко Сергей</option></select>
+                    <i class="ti ti-chevron-down form-select-ic"></i>
+                  </div>
+                </div>
+
+                <!-- Х-проект -->
+                <div class="form-field">
+                  <label class="form-label" for="f-xproject">Х-проект</label>
+                  <div class="form-select-wrap">
+                    <select class="form-select" id="f-xproject"><option>Адаптация новичка за 7 дней</option><option>— Без X-проекта —</option></select>
                     <i class="ti ti-chevron-down form-select-ic"></i>
                   </div>
                 </div>
               </div>
 
-              <!-- План / Вес -->
-              <div class="form-row">
+              <!-- ═══════ Поля командной цели ═══════ -->
+              <div class="form-fields" id="fields-cmd" hidden>
+                <!-- Название -->
                 <div class="form-field">
-                  <label class="form-label" for="f-plan">План</label>
-                  <input class="form-input" id="f-plan" type="text" value="45">
+                  <label class="form-label" for="c-name">Название цели</label>
+                  <input class="form-input" id="c-name" type="text"
+                         placeholder="Сократить время адаптации с 90 до 45 рабочих дней">
                 </div>
+
+                <!-- Период / Категория цели -->
+                <div class="form-row">
+                  <div class="form-field">
+                    <label class="form-label" for="c-period">Период</label>
+                    <div class="form-select-wrap">
+                      <select class="form-select" id="c-period"><option>Q2, 2026</option><option>Q1, 2026</option><option>Q3, 2026</option></select>
+                      <i class="ti ti-chevron-down form-select-ic"></i>
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="c-category">Категория цели</label>
+                    <div class="form-select-wrap">
+                      <select class="form-select" id="c-category"><option>Internal process</option><option>Customer</option><option>Financial</option><option>Learning &amp; growth</option></select>
+                      <i class="ti ti-chevron-down form-select-ic"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Описание и методика расчета -->
                 <div class="form-field">
-                  <label class="form-label" for="f-weight">Вес, %</label>
-                  <input class="form-input" id="f-weight" type="text" value="20%">
+                  <label class="form-label" for="c-desc">Описание и методика расчета</label>
+                  <textarea class="form-textarea" id="c-desc" maxlength="5000" rows="5">Медианная продолжительность адаптации — не более 45 рабочих дней (подтверждено данными HRM).
+85%+ новичков успешно проходят аттестацию с первой попытки.
+NPS процесса адаптации со стороны новичков — не ниже 60.
+NPS со стороны наставников — не ниже 50.
+Отток на испытательном сроке снижен минимум на 30% относительно базового периода.</textarea>
+                  <div class="form-help">Макс: 5 000 симв.</div>
                 </div>
-              </div>
 
-              <!-- Период -->
-              <div class="form-field">
-                <label class="form-label" for="f-period">Период</label>
-                <div class="form-select-wrap">
-                  <select class="form-select" id="f-period">
-                    <option>Q2, 2026</option>
-                    <option>Q1, 2026</option>
-                    <option>Q3, 2026</option>
-                  </select>
-                  <i class="ti ti-chevron-down form-select-ic"></i>
+                <!-- Владелец данных -->
+                <div class="form-field">
+                  <label class="form-label form-label--hint" for="c-owner">Владелец данных
+                    <i class="ti ti-help-circle" title="Подразделение — владелец данных по цели"></i>
+                  </label>
+                  <div class="form-select-wrap">
+                    <select class="form-select" id="c-owner"><option>HR Tech</option><option>Core IT</option><option>Retail</option></select>
+                    <i class="ti ti-chevron-down form-select-ic"></i>
+                  </div>
                 </div>
-              </div>
 
-              <!-- Исполнитель -->
-              <div class="form-field">
-                <label class="form-label" for="f-assignee">Исполнитель</label>
-                <div class="form-select-wrap">
-                  <select class="form-select" id="f-assignee">
-                    <option>Симоненко Сергей</option>
-                    <option>Рощина Наталья</option>
-                    <option>Балев Александр</option>
-                  </select>
-                  <i class="ti ti-chevron-down form-select-ic"></i>
-                </div>
-              </div>
+                <!-- None-agile подразделения -->
+                <label class="form-check">
+                  <input type="checkbox" id="c-nonagile">
+                  <span class="form-check-box"></span>
+                  <span class="form-check-label">None-agile подразделения</span>
+                </label>
 
-              <!-- Владелец цели -->
-              <div class="form-field">
-                <label class="form-label" for="f-owner">Владелец цели</label>
-                <div class="form-select-wrap">
-                  <select class="form-select" id="f-owner">
-                    <option>Рощина Наталья</option>
-                    <option>Симоненко Сергей</option>
-                  </select>
-                  <i class="ti ti-chevron-down form-select-ic"></i>
+                <!-- Единица / План / Минимум / Максимум -->
+                <div class="form-row form-row--4">
+                  <div class="form-field">
+                    <label class="form-label" for="c-unit">Единица измерения</label>
+                    <div class="form-select-wrap">
+                      <select class="form-select" id="c-unit"><option>Дни</option><option>%</option><option>шт.</option></select>
+                      <i class="ti ti-chevron-down form-select-ic"></i>
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="c-plan">План</label>
+                    <input class="form-input" id="c-plan" type="text" value="7">
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="c-min">Минимум</label>
+                    <input class="form-input" id="c-min" type="text" value="85">
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label" for="c-max">Максимум</label>
+                    <input class="form-input" id="c-max" type="text" value="100">
+                  </div>
                 </div>
-              </div>
 
-              <!-- Х-проект -->
-              <div class="form-field">
-                <label class="form-label" for="f-xproject">Х-проект</label>
-                <div class="form-select-wrap">
-                  <select class="form-select" id="f-xproject">
-                    <option>Адаптация новичка за 7 дней</option>
-                    <option>— Без X-проекта —</option>
-                  </select>
-                  <i class="ti ti-chevron-down form-select-ic"></i>
+                <!-- Х-проект -->
+                <div class="form-field">
+                  <label class="form-label" for="c-xproject">Х-проект</label>
+                  <div class="form-select-wrap">
+                    <select class="form-select" id="c-xproject"><option>Адаптация новичка за 7 дней</option><option>— Без X-проекта —</option></select>
+                    <i class="ti ti-chevron-down form-select-ic"></i>
+                  </div>
                 </div>
+
+                <!-- Исполнители (повторяемые) -->
+                <div class="executors" id="c-executors">
+                  <div class="executor-row">
+                    <div class="form-field">
+                      <label class="form-label">Исполнитель</label>
+                      <div class="form-select-wrap">
+                        <select class="form-select"><option>Core IT</option><option>HR Tech</option><option>Retail</option></select>
+                        <i class="ti ti-chevron-down form-select-ic"></i>
+                      </div>
+                    </div>
+                    <div class="form-field">
+                      <label class="form-label">Вес, %</label>
+                      <input class="form-input" type="text" value="20%">
+                    </div>
+                    <button class="btn-danger executor-del" type="button">Удалить</button>
+                  </div>
+                </div>
+
+                <button class="btn-add" id="c-add-executor" type="button">
+                  <i class="ti ti-plus" style="font-size:16px"></i>Добавить исполнителя
+                </button>
               </div>
 
               <!-- Кнопки -->
@@ -203,6 +296,6 @@ NPS со стороны наставников — не ниже 50.
     </div>
   </div>
 
-  <script src="js/goal-form.js?v=12"></script>
+  <script src="js/goal-form.js?v=13"></script>
 </body>
 </html>

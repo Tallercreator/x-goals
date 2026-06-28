@@ -1769,6 +1769,12 @@ ul, ol { list-style-position: inside; }
   flex-direction: column;
   gap: 24px;
 }
+.form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.form-fields[hidden] { display: none; }
 
 .form-head {
   display: flex;
@@ -1859,3 +1865,110 @@ ul, ol { list-style-position: inside; }
   gap: 12px;
   margin-top: 8px;
 }
+
+
+/* ───── Командная форма: доп. компоненты ───── */
+.form-row--4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Лейбл с иконкой-подсказкой */
+.form-label--hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.form-label--hint .ti {
+  font-size: 15px;
+  color: var(--gray-400);
+  cursor: help;
+}
+
+/* Чекбокс */
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.form-check input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.form-check-box {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--gray-300);
+  background: var(--white);
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color .12s, background .12s;
+}
+.form-check input:checked + .form-check-box {
+  background: var(--gray-800);
+  border-color: var(--gray-800);
+}
+.form-check input:checked + .form-check-box::after {
+  content: '';
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  width: 6px;
+  height: 11px;
+  border: solid var(--white);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.form-check input:focus-visible + .form-check-box {
+  box-shadow: 0 0 0 3px rgba(34, 34, 34, .15);
+}
+.form-check-label { font-size: 16px; color: var(--gray-800); }
+
+/* Исполнители (повторяемые строки) */
+.executors {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.executor-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 24px;
+  align-items: end;
+}
+.executor-del {
+  height: 48px;
+  padding: 0 24px;
+  white-space: nowrap;
+}
+
+/* Кнопка «Удалить» (красная) */
+.btn-danger {
+  background: var(--red-50);
+  color: var(--red-600);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 16px;
+  font-weight: 500;
+}
+.btn-danger:hover { background: #fbdadf; }
+
+/* Кнопка «Добавить исполнителя» (зелёная) */
+.btn-add {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 48px;
+  padding: 0 20px;
+  background: var(--green-50);
+  color: var(--green-700);
+  border: none;
+  border-radius: var(--radius-lg);
+  font-size: 16px;
+  font-weight: 500;
+}
+.btn-add:hover { background: #e0eecd; }
