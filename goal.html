@@ -10,11 +10,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 
-  <link rel="stylesheet" href="css/global.css?v=14">
+  <link rel="stylesheet" href="css/global.css?v=15">
 </head>
 <body class="goal-page">
   <div class="browser-chrome">
-    <!-- Декоративная браузерная панель -->
     <div class="browser-bar">
       <div class="traffic">
         <div class="traffic-dot traffic-dot--r"></div>
@@ -31,12 +30,7 @@
     <div class="app">
       <!-- ───────── Sidebar ───────── -->
       <aside class="sidebar">
-        <div class="logo-area">
-          <div class="logo-box">
-            <div class="logo-text"><em>otp</em>space</div>
-          </div>
-        </div>
-
+        <div class="logo-area"><div class="logo-box"><div class="logo-text"><em>otp</em>space</div></div></div>
         <nav class="nav">
           <a class="nav-item" href="#"><i class="ti ti-building"></i>Структура</a>
           <a class="nav-item" href="#"><i class="ti ti-wallet"></i>Расчётные листки</a>
@@ -44,12 +38,10 @@
           <a class="nav-item" href="#"><i class="ti ti-file-text"></i>Заявки</a>
           <a class="nav-item" href="#"><i class="ti ti-bolt"></i>Новости</a>
           <a class="nav-item" href="index.html"><i class="ti ti-target"></i>Командные цели</a>
-
           <div class="nav-sub">
             <a class="nav-sub-item is-active" href="#"><i class="ti ti-flag" style="font-size:17px"></i>Индивидуальные цели</a>
             <a class="nav-sub-item" href="#" style="padding-left:14px;font-size:14px"><i class="ti ti-user" style="font-size:15px"></i>Мои цели</a>
           </div>
-
           <div class="nav-sep"></div>
           <a class="nav-item" href="#"><i class="ti ti-link"></i>Быстрые ссылки</a>
         </nav>
@@ -58,7 +50,7 @@
       <!-- ───────── Main ───────── -->
       <main class="main">
         <header class="topnav">
-          <div class="page-title" id="page-title">Индивидуальные цели</div>
+          <div class="page-title">Индивидуальные цели</div>
           <div class="topnav-right">
             <button class="icon-btn" aria-label="Поиск"><i class="ti ti-search" style="font-size:17px"></i></button>
             <button class="icon-btn" aria-label="Уведомления"><i class="ti ti-bell" style="font-size:17px"></i><span class="notif-dot"></span></button>
@@ -66,72 +58,142 @@
           </div>
         </header>
 
-        <!-- Квартальные табы + stepper согласования -->
-        <div class="nav-bar">
-          <div class="qnav">
-            <button class="year-btn">2024 <i class="ti ti-chevron-down" style="font-size:13px"></i></button>
-            <button class="arr-btn"><i class="ti ti-chevron-left"></i></button>
-            <div class="q-tabs">
-              <div class="q-tab" onclick="selQ(0)">
-                <div class="q-tab-inner"><span class="q-label">Q1</span><span class="q-badge" style="background:var(--purple-400)">оценка</span></div>
-                <div class="q-line"></div>
-              </div>
-              <div class="q-tab is-active" onclick="selQ(1)">
-                <div class="q-tab-inner"><span class="q-label">Q2</span><span class="q-badge" style="background:#f4a883">план</span></div>
-                <div class="q-line"></div>
-              </div>
-            </div>
-            <button class="arr-btn"><i class="ti ti-chevron-right"></i></button>
-          </div>
-
-          <div class="stepper">
-            <div class="step">
-              <div class="step-date">08.05.2024</div>
-              <div class="step-row">
-                <div class="sc sc--done"><i class="ti ti-check" style="font-size:10px"></i></div>
-                <div><div class="step-name">Постановка целей</div><div class="step-sub">Сергиенко А.В.</div></div>
-              </div>
-            </div>
-            <div class="step-line"></div>
-            <div class="step">
-              <div><span class="step-date--active">до 08.05.2024</span></div>
-              <div class="step-row">
-                <div class="sc sc--cur"></div>
-                <div><div class="step-name" style="font-weight:600">Согласование</div><div class="step-sub">Дмитриев К.У.</div></div>
-              </div>
-            </div>
-            <div class="step-line"></div>
-            <div class="step">
-              <div class="step-date--disabled">до 08.05.2024</div>
-              <div class="step-row">
-                <div class="sc sc--todo"></div>
-                <div><div class="step-name" style="color:var(--gray-500);font-size:14px">Завершение<br>постановки целей</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Хлебные крошки навигации по дереву -->
+        <!-- Хлебные крошки -->
         <div class="tree-nav" id="tree-nav"></div>
 
-        <div class="goal-content">
-          <div class="col-headers">
-            <span>Цели</span>
-            <span>Вес</span>
-            <span></span>
-          </div>
-          <div id="goals-area"></div>
-        </div>
+        <div class="goal-detail">
+          <!-- Карточка цели + панель -->
+          <div class="card-wrap">
+            <!-- Главная колонка: карточка цели -->
+            <div class="main-col">
+              <div class="gd-card-head">
+                <i class="ti ti-chevron-up gd-collapse" id="gd-collapse"></i>
+                <h2 class="gd-title" id="gc-title">—</h2>
+                <i class="ti ti-copy gd-copy"></i>
+              </div>
 
-        <div class="bottom-bar">
-          <div class="icon-square"><i class="ti ti-file-description" style="font-size:19px;color:var(--purple-400)"></i></div>
-          <button class="withdraw-btn">Отозвать с согласования</button>
+              <div class="gd-card-body" id="gd-body">
+                <div class="form-field">
+                  <label class="form-label">Цель и ожидаемый результат (Definition of Success)</label>
+                  <div class="form-textarea form-static" id="gc-dos"></div>
+                  <div class="form-help">Макс: 5 000 симв.</div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label">План действий (Definition of Done)</label>
+                  <div class="form-textarea form-static" id="gc-dod"></div>
+                  <div class="form-help">Макс: 5 000 симв.</div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label class="form-label">Тип цели</label>
+                    <div class="form-select-wrap">
+                      <div class="form-select form-static" id="gc-type"></div>
+                      <i class="ti ti-chevron-down form-select-ic"></i>
+                    </div>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label">Единица измерения</label>
+                    <div class="form-select-wrap">
+                      <div class="form-select form-static" id="gc-unit"></div>
+                      <i class="ti ti-chevron-down form-select-ic"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-field">
+                    <label class="form-label">План</label>
+                    <div class="form-input form-static" id="gc-plan"></div>
+                  </div>
+                  <div class="form-field">
+                    <label class="form-label">Вес, %</label>
+                    <div class="form-input form-static" id="gc-weight"></div>
+                  </div>
+                </div>
+
+                <div class="form-field">
+                  <label class="form-label">Период</label>
+                  <div class="form-select-wrap">
+                    <div class="form-select form-static" id="gc-period"></div>
+                    <i class="ti ti-chevron-down form-select-ic"></i>
+                  </div>
+                </div>
+
+                <div class="form-actions">
+                  <button class="btn-primary" id="gc-add">Добавить цель себе</button>
+                  <button class="btn-secondary" id="gc-collapse-btn">Свернуть</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Правая колонка: панель -->
+            <aside class="side-col">
+              <span class="priority-tag">
+                <i class="ti ti-exclamation-circle" style="font-size:13px"></i>Высокий приоритет
+              </span>
+
+              <div class="owner-block">
+                <div class="av-lg" id="sp-owner-ini">РН</div>
+                <div>
+                  <div class="owner-name" id="sp-owner-name">Рощина Наталья</div>
+                  <div class="owner-meta">
+                    <span id="sp-owner-dept">HR Tech</span>
+                    <span class="owner-role">Владелец</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="meta-field">
+                <div class="meta-label">Х-проект</div>
+                <a href="index.html" class="meta-value meta-value--link" id="sp-xproject">Адаптация новичка за 7 дней</a>
+              </div>
+
+              <div class="meta-field">
+                <div class="meta-label">Статус</div>
+                <div class="status-value"><i class="ti ti-loader-2"></i><span>В работе</span></div>
+              </div>
+
+              <div class="meta-field">
+                <div class="meta-label">Редактор</div>
+                <div class="meta-value">Павленова Светлана | HR</div>
+              </div>
+
+              <div class="meta-row">
+                <div class="meta-field">
+                  <div class="meta-label">Срок реализации</div>
+                  <div class="meta-value">30.12.2026</div>
+                </div>
+                <div class="meta-field">
+                  <div class="meta-label">Дата создания</div>
+                  <div class="meta-value">1.02.2026</div>
+                </div>
+              </div>
+
+              <div class="meta-field">
+                <div class="meta-label">Проектная документация</div>
+                <a href="#" class="meta-link">https://confluence.example.com/pages/viewpage.action?pageId=000000000</a>
+              </div>
+            </aside>
+          </div>
+
+          <!-- Связанные цели -->
+          <div class="related-block">
+            <div class="related-head" id="related-head">
+              <i class="ti ti-chevron-down related-chevron" id="related-chevron"></i>
+              <span class="related-title">Связанные цели</span>
+            </div>
+            <div id="related-goals"></div>
+          </div>
         </div>
       </main>
     </div>
   </div>
 
-  <script src="js/data.js?v=14"></script>
-  <script src="js/goal.js?v=14"></script>
+  <script src="js/data.js?v=15"></script>
+  <script src="js/popup.js?v=15"></script>
+  <script src="js/goals-table.js?v=15"></script>
+  <script src="js/goal.js?v=15"></script>
 </body>
 </html>

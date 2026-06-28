@@ -1972,3 +1972,92 @@ ul, ol { list-style-position: inside; }
   font-weight: 500;
 }
 .btn-add:hover { background: #e0eecd; }
+
+
+/* ───── Детальная страница цели (новый макет) ───── */
+.goal-detail {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 32px 40px;
+  background: var(--gray-50);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.goal-detail .card-wrap { flex: none; align-items: stretch; }
+.goal-detail .main-col,
+.goal-detail .side-col { overflow: visible; }
+
+/* Шапка карточки */
+.gd-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.gd-collapse {
+  font-size: 18px;
+  color: var(--gray-500);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.gd-title {
+  flex: 1;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--gray-800);
+  min-width: 0;
+  line-height: 1.3;
+}
+.gd-copy {
+  font-size: 18px;
+  color: var(--gray-300);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.gd-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 20px;
+}
+.gd-card-body[hidden] { display: none; }
+
+/* Поле только для чтения (вид как input, но без ввода) */
+.form-static {
+  cursor: default;
+  display: flex;
+  align-items: center;
+}
+.form-textarea.form-static {
+  display: block;
+  min-height: 0;
+  white-space: pre-line;
+  line-height: 1.55;
+}
+
+/* Ссылка-значение в панели (Х-проект) */
+.meta-value--link { color: var(--purple-600); }
+.meta-value--link:hover { text-decoration: underline; }
+
+/* Связанные цели */
+.related-block {
+  background: var(--white);
+  border: 0.5px solid var(--gray-200);
+  border-radius: var(--radius-2xl);
+  padding: 20px 24px 24px;
+}
+.related-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  user-select: none;
+}
+.related-chevron { font-size: 18px; color: var(--gray-500); flex-shrink: 0; }
+.related-title { font-size: 20px; font-weight: 600; color: var(--gray-800); }
+#related-goals[hidden] { display: none; }
+
+/* Подсветка текущей цели в таблице связанных */
+.tr-current td { background: var(--purple-25); }
+.tr-current td:first-child { box-shadow: inset 3px 0 0 var(--purple-600); }
