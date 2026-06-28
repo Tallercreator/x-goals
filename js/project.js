@@ -326,6 +326,44 @@ function goToGoal(goalId, goalName) {
 }
 
 
+/* ───────── Модалка «Добавить цель» ───────── */
+(function () {
+  var modal = document.getElementById('add-goal-modal');
+  if (!modal) return;
+  var openBtn = document.getElementById('add-goal-btn');
+  var closeBtn = document.getElementById('agm-close');
+  var cancelBtn = document.getElementById('agm-cancel');
+  var submitBtn = document.getElementById('agm-submit');
+
+  function open() {
+    modal.hidden = false;
+    document.addEventListener('keydown', onKey);
+    var checked = modal.querySelector('input[name="goalType"]:checked');
+    if (checked) checked.focus();
+  }
+  function close() {
+    modal.hidden = true;
+    document.removeEventListener('keydown', onKey);
+    if (openBtn) openBtn.focus();
+  }
+  function onKey(e) { if (e.key === 'Escape') close(); }
+
+  if (openBtn) openBtn.onclick = open;
+  if (closeBtn) closeBtn.onclick = close;
+  if (cancelBtn) cancelBtn.onclick = close;
+  /* Клик по затемнению (вне карточки) закрывает */
+  modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+
+  if (submitBtn) submitBtn.onclick = function () {
+    var sel = modal.querySelector('input[name="goalType"]:checked');
+    var type = sel ? sel.value : 'cmd';
+    /* Заглушка: страницы создания цели пока нет */
+    console.log('Создание цели, тип:', type);
+    close();
+  };
+})();
+
+
 /* ───────── Init ───────── */
 /* По умолчанию открыт только первый квартал, остальные свёрнуты */
 QUARTERS.forEach(function (q, i) { if (i > 0) collapsedQ[q.id] = true; });

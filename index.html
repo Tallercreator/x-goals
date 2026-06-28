@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
 
-  <link rel="stylesheet" href="css/global.css?v=9">
+  <link rel="stylesheet" href="css/global.css?v=10">
 </head>
 <body>
   <div class="browser-chrome">
@@ -119,7 +119,7 @@
               <div>
                 <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
                   <div class="section-label" style="margin-bottom:0">Цели проекта</div>
-                  <button class="add-goal-row"><i class="ti ti-plus" style="font-size:14px"></i>Добавить цели</button>
+                  <button class="add-goal-row" id="add-goal-btn"><i class="ti ti-plus" style="font-size:14px"></i>Добавить цели</button>
                 </div>
                 <div id="goals-section"></div>
               </div>
@@ -188,8 +188,34 @@
     </div>
   </div>
 
-  <script src="js/data.js?v=9"></script>
-  <script src="js/popup.js?v=9"></script>
-  <script src="js/project.js?v=9"></script>
+  <!-- ───────── Модалка «Добавить цель» ───────── -->
+  <div class="modal-overlay" id="add-goal-modal" hidden>
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="agm-title">
+      <button class="modal-close" id="agm-close" aria-label="Закрыть"><i class="ti ti-x"></i></button>
+      <div class="modal-title" id="agm-title">Добавить цель</div>
+
+      <div class="modal-options">
+        <label class="radio-row">
+          <input type="radio" name="goalType" value="cmd" checked>
+          <span class="radio-dot"></span>
+          <span class="radio-label">Создать командную цель</span>
+        </label>
+        <label class="radio-row">
+          <input type="radio" name="goalType" value="ind">
+          <span class="radio-dot"></span>
+          <span class="radio-label">Создать индивидуальную цель</span>
+        </label>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-cancel" id="agm-cancel">Отменить</button>
+        <button class="btn-dark" id="agm-submit">Перейти к созданию цели</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js?v=10"></script>
+  <script src="js/popup.js?v=10"></script>
+  <script src="js/project.js?v=10"></script>
 </body>
 </html>

@@ -1620,3 +1620,132 @@ ul, ol { list-style-position: inside; }
   align-items: center;
   gap: 8px;
 }
+
+
+/* ───── Модалка «Добавить цель» ───── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+  animation: modal-fade .15s ease both;
+}
+.modal-overlay[hidden] { display: none; }
+
+@keyframes modal-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modal-pop {
+  from { opacity: 0; transform: translateY(8px) scale(.98); }
+  to   { opacity: 1; transform: none; }
+}
+
+.modal-card {
+  position: relative;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 24px;
+  width: 480px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, .22);
+  animation: modal-pop .18s ease both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .modal-overlay, .modal-card { animation: none; }
+}
+
+.modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-lg);
+  background: var(--gray-50);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-800);
+  font-size: 16px;
+}
+.modal-close:hover { background: var(--gray-200); }
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--gray-800);
+  padding-right: 40px;
+}
+
+.modal-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.radio-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+.radio-row input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.radio-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid var(--gray-300);
+  flex-shrink: 0;
+  position: relative;
+  transition: border-color .12s;
+}
+.radio-row input:checked + .radio-dot { border-color: var(--gray-800); }
+.radio-row input:checked + .radio-dot::after {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--gray-800);
+}
+.radio-row input:focus-visible + .radio-dot {
+  box-shadow: 0 0 0 3px rgba(34, 34, 34, .15);
+}
+.radio-label { font-size: 16px; color: var(--gray-800); }
+
+.modal-actions {
+  display: flex;
+  gap: 12px;
+}
+.btn-cancel {
+  height: 48px;
+  padding: 0 24px;
+  background: var(--gray-50);
+  color: var(--gray-600);
+  border: none;
+  border-radius: 200px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.btn-cancel:hover { background: var(--gray-200); }
+.btn-dark {
+  flex: 1;
+  height: 48px;
+  padding: 0 24px;
+  background: var(--gray-800);
+  color: var(--white);
+  border: none;
+  border-radius: 200px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.btn-dark:hover { background: #333; }
